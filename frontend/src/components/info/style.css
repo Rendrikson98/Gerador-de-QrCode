@@ -1,0 +1,22 @@
+.containerInfo{
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    margin: 0% 5% 2% 5%;
+}
+
+.rowInfoTitle{
+    display: flex;
+    justify-content: center;
+    margin-bottom: 30px;
+    font-size: 1.2em;
+}
+
+.rowInfo{
+    text-align: justify;
+    justify-content: start;
+    font-size: 1em;
+    line-height: 30px;
+}
+
+.rowInfo > p:nth-child(n+2){
+    text-indent: 2em;
+}
