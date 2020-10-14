@@ -11,10 +11,12 @@ export default function InitialPage(){
     const [adress, setAdress] = useState('');
     const [baseUrl, setBaseURL] = useState('http://localhost:3333');
     const [url, setUrl] = useState('qrcodePng?url=www.example.com');
+    const [data, setData] = useState();
 
     async function generetor(value){
-        const resultApi = await api.get(`qrcode?url=${value}`);
+        const resultApi = await api.get(`qrcodePng?url=${value}`);
         console.log(resultApi)
+        setData(resultApi.data)
         setBaseURL(resultApi.config.baseURL);
         setUrl(resultApi.config.url);
     }
@@ -32,14 +34,18 @@ export default function InitialPage(){
                     <div className='qrcode'>
                         <img src={`${baseUrl}/${url}`} />
                         <div className='buttons'>
-                            <button type='button'>
-                                <AiOutlineArrowDown size={15}/>
-                                PNG
-                            </button>
-                            <button type='button'>
-                                <AiOutlineArrowDown size={15}/>
-                                SVG
-                            </button>
+                            <a href={`${baseUrl}/${url}`}>
+                                <button type='button'>
+                                    <AiOutlineArrowDown size={15}/>
+                                    PNG
+                                </button>
+                            </a>
+                            <a href={`${baseUrl}/qrcode?url=${adress}`}>
+                                <button type='button'>
+                                    <AiOutlineArrowDown size={15}/>
+                                    SVG            
+                                </button>
+                            </a>
                         </div>
                     </div>
                 </div>
