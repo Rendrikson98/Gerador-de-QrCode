@@ -2,7 +2,7 @@
 
 ![alt text](https://github.com/Rendrikson98/Gerador-de-QrCode/blob/master/frontend/src/assets/tamplete.png?raw=true)
 
-A aplicação web aqui apresenta possibilita a geração de QR Code de forma rápida e fácil, além do download do mesmo nos formatos PNG ou SVG.
+A aplicação web aqui apresenta possibilita a geração de QR Code de forma rápida e fácil, além do download do QR Code nos formatos PNG ou SVG.
 
 Esse é um projeto que utiliza as tecnologias React js para o frontend da aplicação e o Node.js para o Backend. 
 
