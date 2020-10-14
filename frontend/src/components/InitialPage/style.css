@@ -91,11 +91,7 @@ body{
     margin: 0px 0px 0px 0px
 }
 
-.buttons > a{
-    text-decoration: none;
-}
-
-.buttons > a > button{
+.buttons > button{
     display: flex;
     justify-content: center;
     align-items: center;
@@ -108,7 +104,7 @@ body{
     background-color: transparent;
 }
 
-.buttons > a > button:hover{
+.buttons > button:hover{
     cursor: pointer;
     color: white;
     background-color: #438bcf;

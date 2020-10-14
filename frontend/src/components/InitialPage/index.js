@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { AiOutlineArrowDown } from 'react-icons/ai'
+import { AiOutlineArrowDown } from 'react-icons/ai';
 import api from '../../server/api';
 import Menu from '../Menu';
 import Info from '../info';
@@ -11,14 +11,45 @@ export default function InitialPage(){
     const [adress, setAdress] = useState('');
     const [baseUrl, setBaseURL] = useState('http://localhost:3333');
     const [url, setUrl] = useState('qrcodePng?url=www.example.com');
-    const [data, setData] = useState();
 
     async function generetor(value){
         const resultApi = await api.get(`qrcodePng?url=${value}`);
-        console.log(resultApi)
-        setData(resultApi.data)
         setBaseURL(resultApi.config.baseURL);
         setUrl(resultApi.config.url);
+    }
+
+    function donwloadPng(){
+        api({ 
+            url:`${baseUrl}/${url}`, 
+            method:'GET', 
+            responseType: 'blob' 
+        }) 
+        .then((response) => { 
+            const url = window.URL 
+            .createObjectURL(new Blob([response.data])); 
+                    const link = document.createElement('a'); 
+                    link.href = url; 
+                    link.setAttribute('download', 'qrCodeNow.png'); 
+                    document.body.appendChild(link); 
+                    link.click(); 
+        }) 
+    }
+
+    function donwloadSvg(){
+        api({ 
+            url:`${baseUrl}/qrcode?url=${adress}`, 
+            method:'GET', 
+            responseType: 'blob' 
+        }) 
+        .then((response) => { 
+            const url = window.URL 
+            .createObjectURL(new Blob([response.data])); 
+                    const link = document.createElement('a'); 
+                    link.href = url; 
+                    link.setAttribute('download', 'qrCodeNow.svg'); 
+                    document.body.appendChild(link); 
+                    link.click(); 
+        }) 
     }
 
     return(
@@ -34,18 +65,14 @@ export default function InitialPage(){
                     <div className='qrcode'>
                         <img src={`${baseUrl}/${url}`} />
                         <div className='buttons'>
-                            <a href={`${baseUrl}/${url}`}>
-                                <button type='button'>
-                                    <AiOutlineArrowDown size={15}/>
-                                    PNG
-                                </button>
-                            </a>
-                            <a href={`${baseUrl}/qrcode?url=${adress}`}>
-                                <button type='button'>
-                                    <AiOutlineArrowDown size={15}/>
-                                    SVG            
-                                </button>
-                            </a>
+                            <button type='button' onClick={() => donwloadPng()}>
+                                <AiOutlineArrowDown size={15}/>
+                                PNG
+                            </button>
+                            <button type='button' onClick={() => donwloadSvg()}>
+                                <AiOutlineArrowDown size={15}/>
+                                SVG            
+                            </button>
                         </div>
                     </div>
                 </div>
